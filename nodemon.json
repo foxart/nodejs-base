@@ -1,0 +1,14 @@
+{
+	"verbose": true,
+	"watch": [
+		"src",
+		"test"
+	],
+	"ext": "js",
+	"ignoreRoot": [
+		".git"
+	],
+	"ignore": [
+		"node_modules"
+	]
+}

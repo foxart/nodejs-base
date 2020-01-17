@@ -1,0 +1,26 @@
+{
+  "name": "fa-base",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./test",
+    "lint": "eslint -c .eslintrc.json.google ./src",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/foxart/nodejs-beautifier.git"
+  },
+  "author": "Ivan Kosenko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/foxart/nodejs-base/issues"
+  },
+  "homepage": "https://github.com/foxart/nodejs-base#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^6.7.2",
+    "eslint-config-google": "^0.14.0"
+  }
+}
