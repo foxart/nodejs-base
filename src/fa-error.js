@@ -1,6 +1,27 @@
 'use strict';
 
 /**
+ *
+ */
+class FaErrorTrace {
+	/**
+	 * @param {string|null} method
+	 * @param {string|null} path
+	 * @param {string|null} line
+	 * @param {string|null} column
+	 * @return {{path: string|null, method: string|null, line: string|null, column: string|null}}
+	 */
+	constructor(method = null, path = null, line = null, column = null) {
+		return Object.create({
+			method,
+			path,
+			line,
+			column,
+		});
+	}
+}
+
+/**
  * @constructor
  */
 class FaError extends Error {
@@ -31,8 +52,24 @@ class FaError extends Error {
 	}
 
 	/**
+	 * @param {string|null} method
+	 * @param {string|null} path
+	 * @param {string|null} line
+	 * @param {string|null} column
+	 * @return {{path: string|null, method: string|null, line: string|null, column: string|null}}
+	 */
+	static trace1(method = null, path = null, line = null, column = null) {
+		return Object.create({
+			method,
+			path,
+			line,
+			column,
+		});
+	}
+
+	/**
 	 * @param {string} data
-	 * @return {Array}
+	 * @return {FaErrorTrace[]}
 	 */
 	static stack(data) {
 		const list = data.split('\n').filter((item) => item);
@@ -45,39 +82,46 @@ class FaError extends Error {
 			const Match2 = Expression2.exec(item);
 			const Match3 = Expression3.exec(item);
 			if (Match1) {
-				return {
-					method: Match1[1],
-					path: Match1[2],
-					line: Match1[3],
-					column: Match1[4],
-				};
+				return new FaErrorTrace(Match1[1], Match1[2], Match1[3], Match1[4]);
 			} else if (Match2) {
-				return {
-					method: null,
-					path: Match2[1],
-					line: Match2[2],
-					column: Match2[3],
-				};
+				return new FaErrorTrace(null, Match2[1], Match2[2], Match2[3]);
 			} else if (Match3) {
-				return {
-					method: Match3[1],
-					path: null,
-					line: null,
-					column: null,
-				};
+				return new FaErrorTrace(Match3[1]);
 			} else {
-				return {
-					method: item,
-					path: null,
-					line: null,
-					column: null,
-				};
+				return new FaErrorTrace(item);
 			}
 		});
 	}
 
 	/**
-	 * @param {string} trace
+	 *
+	 * @param {number} level
+	 * @return {FaErrorTrace}
+	 */
+	get(level) {
+		return this.trace[level];
+	}
+
+	/**
+	 * @param {number} level
+	 * @return {FaError}
+	 */
+	cut(level) {
+		this.trace = [this.trace[level]];
+		return this;
+	}
+
+	/**
+	 * @param {FaErrorTrace|FaErrorTrace[]} trace
+	 * @return {FaError}
+	 */
+	set(trace) {
+		this.trace = Array.isArray(trace) ? trace : [trace];
+		return this;
+	}
+
+	/**
+	 * @param {FaErrorTrace} trace
 	 * @return {FaError}
 	 */
 	append(trace) {
@@ -86,32 +130,11 @@ class FaError extends Error {
 	}
 
 	/**
-	 * @param {string} trace
+	 * @param {FaErrorTrace} trace
 	 * @return {FaError}
 	 */
 	prepend(trace) {
 		this.trace.unshift(trace);
-		return this;
-	}
-
-	/**
-	 * @param {string} trace
-	 * @return {FaError}
-	 */
-	set(trace) {
-		if (trace) {
-			this.trace = Array.isArray(trace) ? trace : [trace];
-		}
-		return this;
-	}
-
-	/**
-	 *
-	 * @param {number|undefined} level
-	 * @return {FaError}
-	 */
-	pick(level = undefined) {
-		this.trace = level ? this.trace : [this.trace[level]];
 		return this;
 	}
 }
