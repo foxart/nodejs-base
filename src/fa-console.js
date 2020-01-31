@@ -2,7 +2,6 @@
 /**/
 // const FaBeautifier = require('fa-beautifier');
 const FaError = require('./fa-error');
-
 /** @type {Object} */
 // const DateAndTime = require('date-and-time');
 /**
@@ -25,8 +24,11 @@ class FaConsole {
 	constructor(beautifier) {
 		this.beautifier = beautifier;
 		const self = this;
-		console.log = function() {
-			self._log(self._extractArguments(arguments));
+		console.log = (...args) => {
+			args = self._arguments(args);
+			for (let i = 0; i <= args.length - 1; i++) {
+				Console.log(self.beautifier.trace(new FaError('').get(1)), self.beautifier.beautify(args[i]));
+			}
 		};
 		// console.info = function() {
 		// 	self._log(this.beautifier.beautify(self._extractArguments(arguments)));
@@ -52,6 +54,15 @@ class FaConsole {
 		console.clear = function() {
 			process.stdout.write('\x1Bc');
 		};
+	}
+
+	/**
+	 * @param {*} data
+	 * @return {*}
+	 * @private
+	 */
+	_arguments(data) {
+		return data.length === 1 ? [data[0]] : data;
 	}
 
 	_getAlign(list) {
@@ -88,40 +99,6 @@ class FaConsole {
 		} else {
 			return `${wrapper}${spacer}${data.toString() + Array(length).join(spacer)}${spacer}${wrapper}`;
 		}
-	}
-
-	/**
-	 * @param data
-	 * @return {*}
-	 * @private
-	 */
-	_extractArguments(data) {
-		return data.length === 1 ? data[0] : data;
-	}
-
-	/**
-	 * @param {*} args
-	 * @return {void}
-	 * @private
-	 */
-	_log(...args) {
-		// let time = DateAndTime.format(new Date(new Date().setUTCHours(new Date().getUTCHours() + 2)), "H:mm:ss");
-		const time = new Date(new Date().setUTCHours(new Date().getUTCHours() + 2));
-		const trace = new FaError('').get(2);
-		console.info(trace);
-		const path = trace['path'] ? trace['path'].replace(process.cwd(), '') : trace['path'];
-		console.info(time, path);
-		// let path = trace['path'];
-		// let line = trace['line'];
-		// let column = trace['column'];
-		// let string = template.replaceAll([
-		// 		"{time}", "{path}", "{line}", "{column}", "{data}",
-		// 	], [
-		// 		time, path, line, column, data,
-		// 	]
-		// );
-		// let string = [time, path, line, column, data];
-		Console.log(this.beautifier.trace(), this.beautifier.beautify(args));
 	}
 }
 

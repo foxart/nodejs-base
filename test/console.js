@@ -12,13 +12,18 @@ const FaBeautifierColor = new FaBeautifier(FaBeautifierWrapperColor);
 // const FaBeautifierHtml = new FaBeautifier(WrapperHtml);
 const Console = require('../src/fa-console');
 const con = new Console(FaBeautifierColor);
-
 const err = new FaError('hui');
 
-
-console.log(err);
-console.log(err.get(1));
-
+function test() {
+	console.log('');
+	console.log(1, '');
+	console.log(2, {a: ''});
+	console.log(3, err);
+}
+test();
+// console.log(err.get(1), 2, 3);
+//
+// console.log([1, 2, 3], undefined);
 // const test = {a: 1, b: 3.14, str: 'string'};
 // console.log(test);
 

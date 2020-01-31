@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/foxart/nodejs-base#readme",
   "dependencies": {
-    "fa-beautifier": "^1.0.11"
+    "fa-beautifier": "^1.0.12"
   },
   "devDependencies": {
     "eslint": "^6.7.2",
