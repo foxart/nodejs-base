@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./test",
+    "start": "echo \"Error: no start specified\" && exit 1",
     "lint": "eslint -c .eslintrc.json.google ./src",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test:console": "nodemon ./test/console.js",
+    "test:error": "nodemon ./test/error.js"
   },
   "repository": {
     "type": "git",
@@ -18,7 +19,9 @@
     "url": "https://github.com/foxart/nodejs-base/issues"
   },
   "homepage": "https://github.com/foxart/nodejs-base#readme",
-  "dependencies": {},
+  "dependencies": {
+    "fa-beautifier": "^1.0.11"
+  },
   "devDependencies": {
     "eslint": "^6.7.2",
     "eslint-config-google": "^0.14.0"

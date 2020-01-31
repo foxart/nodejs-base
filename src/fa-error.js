@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- *
+ * @constructor
  */
 class FaErrorTrace {
 	/**
@@ -9,15 +9,15 @@ class FaErrorTrace {
 	 * @param {string|null} path
 	 * @param {string|null} line
 	 * @param {string|null} column
-	 * @return {{path: string|null, method: string|null, line: string|null, column: string|null}}
+	 * @return {{path: *, method: *, line: *, column: *}}
 	 */
 	constructor(method = null, path = null, line = null, column = null) {
-		return Object.create({
+		return {
 			method,
 			path,
 			line,
 			column,
-		});
+		};
 	}
 }
 
@@ -56,7 +56,7 @@ class FaError extends Error {
 	 * @param {string|null} path
 	 * @param {string|null} line
 	 * @param {string|null} column
-	 * @return {{path: string|null, method: string|null, line: string|null, column: string|null}}
+	 * @return {{path: *, method: *, line: *, column: *}}
 	 */
 	static trace1(method = null, path = null, line = null, column = null) {
 		return Object.create({

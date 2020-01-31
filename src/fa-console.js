@@ -1,6 +1,7 @@
 'use strict';
 /**/
-const FaBeautifier = require('fa-beautifier');
+// const FaBeautifier = require('fa-beautifier');
+const FaError = require('./fa-error');
 
 /** @type {Object} */
 // const DateAndTime = require('date-and-time');
@@ -19,23 +20,23 @@ const Console = {
  */
 class FaConsole {
 	/**
-	 * @param wrapper {FaBeautifierWrapperInterface}
+	 * @param {FaBeautifier} beautifier
 	 */
-	constructor(wrapper) {
-		this.beautifier = new FaBeautifier(wrapper);
-		let self = this;
-		console.log = function () {
+	constructor(beautifier) {
+		this.beautifier = beautifier;
+		const self = this;
+		console.log = function() {
 			self._log(self._extractArguments(arguments));
 		};
-		console.info = function () {
-			self._log(this.beautifier.beautify(self._extractArguments(arguments)));
-		};
-		console.warn = function () {
-			self._log(this.beautifier.beautify(self._extractArguments(arguments)));
-		};
-		console.error = function () {
-			self._log(this.beautifier.beautify(self._extractArguments(arguments)));
-		};
+		// console.info = function() {
+		// 	self._log(this.beautifier.beautify(self._extractArguments(arguments)));
+		// };
+		// console.warn = function() {
+		// 	self._log(this.beautifier.beautify(self._extractArguments(arguments)));
+		// };
+		// console.error = function() {
+		// 	self._log(this.beautifier.beautify(self._extractArguments(arguments)));
+		// };
 		// console.message = function () {
 		// 	let result = [];
 		// 	let text = FaBeautify.plain(self._extractArguments(arguments));
@@ -48,8 +49,8 @@ class FaConsole {
 		// 	result.push(`${self._messageFooter(align)}`);
 		// 	self._log("\n" + result.join("\n"), template.log);
 		// };
-		console.clear = function () {
-			process.stdout.write("\x1Bc");
+		console.clear = function() {
+			process.stdout.write('\x1Bc');
 		};
 	}
 
@@ -64,22 +65,22 @@ class FaConsole {
 	}
 
 	_messageHeader(align) {
-		return `\u250c\u2500${Array(align + 1).join("\u2500")}\u2500\u2510`;
+		return `\u250c\u2500${Array(align + 1).join('\u2500')}\u2500\u2510`;
 	}
 
 	_messageFooter(align) {
-		return `\u2514\u2500${Array(align + 1).join("\u2500")}\u2500\u2518`;
+		return `\u2514\u2500${Array(align + 1).join('\u2500')}\u2500\u2518`;
 	}
 
 	_messageSpacer(align) {
-		return `\u251c\u2500${Array(align + 1).join("\u2500")}\u2500\u2524`;
+		return `\u251c\u2500${Array(align + 1).join('\u2500')}\u2500\u2524`;
 	}
 
 	_messageBody(data, align) {
-		let wrapper = "\u2502";
-		let spacer = " ";
+		let wrapper = '\u2502';
+		let spacer = ' ';
 		if (data === undefined) {
-			data = "undefined"
+			data = 'undefined';
 		}
 		let length = align - data.length + 1;
 		if (length < 0) {
@@ -95,22 +96,24 @@ class FaConsole {
 	 * @private
 	 */
 	_extractArguments(data) {
-		return data.length === 1 ? data[0] : data
+		return data.length === 1 ? data[0] : data;
 	}
 
 	/**
-	 * @param data
-	 * @param template
+	 * @param {*} args
+	 * @return {void}
 	 * @private
 	 */
-	_log(data, template) {
+	_log(...args) {
 		// let time = DateAndTime.format(new Date(new Date().setUTCHours(new Date().getUTCHours() + 2)), "H:mm:ss");
-		let time = new Date(new Date().setUTCHours(new Date().getUTCHours() + 2));
-		let trace = 'FaTrace.trace(2)';
-		// let path = trace["path"] ? trace["path"].replace(process.cwd(), "") : trace["path"];
-		let path = trace["path"];
-		let line = trace["line"];
-		let column = trace["column"];
+		const time = new Date(new Date().setUTCHours(new Date().getUTCHours() + 2));
+		const trace = new FaError('').get(2);
+		console.info(trace);
+		const path = trace['path'] ? trace['path'].replace(process.cwd(), '') : trace['path'];
+		console.info(time, path);
+		// let path = trace['path'];
+		// let line = trace['line'];
+		// let column = trace['column'];
 		// let string = template.replaceAll([
 		// 		"{time}", "{path}", "{line}", "{column}", "{data}",
 		// 	], [
@@ -118,8 +121,7 @@ class FaConsole {
 		// 	]
 		// );
 		// let string = [time, path, line, column, data];
-		// Console.log(string);
-		Console.log(this.beautifier.beautify(data));
+		Console.log(this.beautifier.trace(), this.beautifier.beautify(args));
 	}
 }
 
