@@ -1,5 +1,4 @@
 'use strict';
-process.stdout.write('\x1Bc');
 const FaError = require('../error');
 const FaBeautifier = require('fa-beautifier');
 const FaBeautifierWrapperColor = require('fa-beautifier/wrapper-console');
@@ -10,9 +9,13 @@ const FaBeautifierColor = new FaBeautifier(FaBeautifierWrapperColor);
 // const FaBeautifierJson = new FaBeautifier(WrapperJson);
 // const WrapperHtml = require('fa-beautifier/src/wrapper/wrapper-html');
 // const FaBeautifierHtml = new FaBeautifier(WrapperHtml);
-const Console = require('../src/fa-console');
-const con = new Console(FaBeautifierColor);
-const err = new FaError('hui');
+const FaConsole = require('../src/fa-console');
+new FaConsole(FaBeautifierColor);
+console.clear();
+// console.log = Console.log;
+// console.clear = Console.clear;
+const err = new FaError('my custom error');
+console.log('xxx');
 
 function test() {
 	console.log('');
@@ -20,6 +23,7 @@ function test() {
 	console.log(2, {a: ''});
 	console.log(3, err);
 }
+
 test();
 // console.log(err.get(1), 2, 3);
 //

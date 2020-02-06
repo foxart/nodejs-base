@@ -24,21 +24,18 @@ class FaConsole {
 	constructor(beautifier) {
 		this.beautifier = beautifier;
 		const self = this;
-		console.log = (...args) => {
-			args = self._arguments(args);
-			for (let i = 0; i <= args.length - 1; i++) {
-				Console.log(self.beautifier.trace(new FaError('').get(1)), self.beautifier.beautify(args[i]));
-			}
+		const log = console.log;
+		console.clear = () => {
+			process.stdout.write('\x1Bc');
 		};
-		// console.info = function() {
-		// 	self._log(this.beautifier.beautify(self._extractArguments(arguments)));
-		// };
-		// console.warn = function() {
-		// 	self._log(this.beautifier.beautify(self._extractArguments(arguments)));
-		// };
-		// console.error = function() {
-		// 	self._log(this.beautifier.beautify(self._extractArguments(arguments)));
-		// };
+		console.log = (...args) => {
+			// const trace = new FaError('').get(1);
+			// args = args.length === 1 ? [args[0]] : args;
+			// for (let i = 0; i <= args.length - 1; i++) {
+			// 	log(self.beautifier.log(trace), self.beautifier.beautify(args[i]));
+			// }
+			log(self.beautifier.log(args));
+		};
 		// console.message = function () {
 		// 	let result = [];
 		// 	let text = FaBeautify.plain(self._extractArguments(arguments));
@@ -51,9 +48,6 @@ class FaConsole {
 		// 	result.push(`${self._messageFooter(align)}`);
 		// 	self._log("\n" + result.join("\n"), template.log);
 		// };
-		console.clear = function() {
-			process.stdout.write('\x1Bc');
-		};
 	}
 
 	/**
@@ -65,6 +59,11 @@ class FaConsole {
 		return data.length === 1 ? [data[0]] : data;
 	}
 
+	/**
+	 * @param {Array} list
+	 * @return {number}
+	 * @private
+	 */
 	_getAlign(list) {
 		let result = 0;
 		for (let keys = Object.keys(list), i = 0, end = keys.length - 1; i <= end; i++) {
@@ -75,25 +74,46 @@ class FaConsole {
 		return result;
 	}
 
+	/**
+	 * @param {number} align
+	 * @return {string}
+	 * @private
+	 */
 	_messageHeader(align) {
 		return `\u250c\u2500${Array(align + 1).join('\u2500')}\u2500\u2510`;
 	}
 
+	/**
+	 * @param {number} align
+	 * @return {string}
+	 * @private
+	 */
 	_messageFooter(align) {
 		return `\u2514\u2500${Array(align + 1).join('\u2500')}\u2500\u2518`;
 	}
 
+	/**
+	 * @param {number} align
+	 * @return {string}
+	 * @private
+	 */
 	_messageSpacer(align) {
 		return `\u251c\u2500${Array(align + 1).join('\u2500')}\u2500\u2524`;
 	}
 
+	/**
+	 * @param {*} data
+	 * @param {number} align
+	 * @return {string}
+	 * @private
+	 */
 	_messageBody(data, align) {
-		let wrapper = '\u2502';
-		let spacer = ' ';
+		const wrapper = '\u2502';
+		const spacer = ' ';
 		if (data === undefined) {
 			data = 'undefined';
 		}
-		let length = align - data.length + 1;
+		const length = align - data.length + 1;
 		if (length < 0) {
 			return `${wrapper}${spacer}${data.toString().substring(0, align)}${spacer}${wrapper}`;
 		} else {
