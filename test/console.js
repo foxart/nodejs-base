@@ -12,10 +12,6 @@ const FaBeautifierColor = new FaBeautifier(FaBeautifierWrapperColor);
 const FaConsole = require('../src/fa-console');
 new FaConsole(FaBeautifierColor);
 console.clear();
-// console.log = Console.log;
-// console.clear = Console.clear;
-const err = new FaError('my custom error');
-console.log('xxx');
 
 function test() {
 	console.log('');
@@ -24,7 +20,12 @@ function test() {
 	console.log(3, err);
 }
 
+// console.log = Console.log;
+// console.clear = Console.clear;
+const err = new FaError('my custom error');
+console.log('XXX');
 test();
+console.message(1, 'x', null, undefined);
 // console.log(err.get(1), 2, 3);
 //
 // console.log([1, 2, 3], undefined);

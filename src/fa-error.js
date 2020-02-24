@@ -11,7 +11,7 @@ class FaErrorTrace {
 	 * @param {string|null} column
 	 * @return {{path: *, method: *, line: *, column: *}}
 	 */
-	constructor(method = null, path = null, line = null, column = null) {
+	constructor(method, path, line, column) {
 		return {
 			method,
 			path,
@@ -52,22 +52,6 @@ class FaError extends Error {
 	}
 
 	/**
-	 * @param {string|null} method
-	 * @param {string|null} path
-	 * @param {string|null} line
-	 * @param {string|null} column
-	 * @return {{path: *, method: *, line: *, column: *}}
-	 */
-	static trace1(method = null, path = null, line = null, column = null) {
-		return Object.create({
-			method,
-			path,
-			line,
-			column,
-		});
-	}
-
-	/**
 	 * @param {string} data
 	 * @return {FaErrorTrace[]}
 	 */
@@ -82,13 +66,15 @@ class FaError extends Error {
 			const Match2 = Expression2.exec(item);
 			const Match3 = Expression3.exec(item);
 			if (Match1) {
+				Match1[2] = Match1[2] ? Match1[2].replace(process.cwd(), '') : Match1[2];
 				return new FaErrorTrace(Match1[1], Match1[2], Match1[3], Match1[4]);
 			} else if (Match2) {
+				Match2[1] = Match2[1] ? Match2[1].replace(process.cwd(), '') : Match2[1];
 				return new FaErrorTrace(null, Match2[1], Match2[2], Match2[3]);
 			} else if (Match3) {
-				return new FaErrorTrace(Match3[1]);
+				return new FaErrorTrace(Match3[1], null, null, null);
 			} else {
-				return new FaErrorTrace(item);
+				return new FaErrorTrace(item, null, null, null);
 			}
 		});
 	}
@@ -139,7 +125,6 @@ class FaError extends Error {
 	}
 }
 
-// Error = FaError;
 /**
  * @class {FaError}
  */
