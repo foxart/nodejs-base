@@ -1,5 +1,4 @@
 'use strict';
-/** @type {Class} */
 const DateAndTime = require('date-and-time');
 const ef = require('fa-beautifier/console-effect');
 const cl = require('fa-beautifier/console-color');
@@ -47,7 +46,7 @@ class FaConsole {
 	 * @param {string} date
 	 * @param {string} trace
 	 * @param {string} data
-	 * @return {string}
+	 * @returns {string}
 	 */
 	log(date, trace, data) {
 		return `${ef.reset}${cl.white}[${cl.yellow}${date}${cl.white}] ${trace} ${ef.bold}${cl.black}| ${data}`;
@@ -55,19 +54,19 @@ class FaConsole {
 
 	/**
 	 * @param {FaErrorTrace} data
-	 * @return {string}
+	 * @returns {string}
 	 */
 	logTrace(data) {
 		return [
 			`${ef.reset}${ef.bold}${data.method}`,
 			`${ef.reset}${ef.bold}${cl.black}${data.path}`,
-			`${ef.reset}${cl.yellow}${data.line}${ef.bold}${cl.black}:${ef.reset}${data.column}`,
+			`${ef.reset}${cl.yellow}${data.line}${ef.bold}${cl.black}:${ef.reset}${data.column}`
 		].join(' ');
 	}
 
 	/**
 	 * @param {Array} list
-	 * @return {number}
+	 * @returns {number}
 	 * @private
 	 */
 	_align(list) {
@@ -90,7 +89,7 @@ class FaConsole {
 
 	/**
 	 * @param {number} align
-	 * @return {string}
+	 * @returns {string}
 	 * @private
 	 */
 	_header(align) {
@@ -99,7 +98,7 @@ class FaConsole {
 
 	/**
 	 * @param {number} align
-	 * @return {string}
+	 * @returns {string}
 	 * @private
 	 */
 	_footer(align) {
@@ -108,7 +107,7 @@ class FaConsole {
 
 	/**
 	 * @param {number} align
-	 * @return {string}
+	 * @returns {string}
 	 * @private
 	 */
 	_spacer(align) {
@@ -118,7 +117,7 @@ class FaConsole {
 	/**
 	 * @param {string} data
 	 * @param {number} align
-	 * @return {string}
+	 * @returns {string}
 	 * @private
 	 */
 	_body(data, align) {

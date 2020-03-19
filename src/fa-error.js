@@ -1,25 +1,8 @@
 'use strict';
-
 /**
- * @constructor
+ * @class {FaErrorTrace}
  */
-class FaErrorTrace {
-	/**
-	 * @param {string|null} method
-	 * @param {string|null} path
-	 * @param {string|null} line
-	 * @param {string|null} column
-	 * @return {{path: *, method: *, line: *, column: *}}
-	 */
-	constructor(method, path, line, column) {
-		return {
-			method,
-			path,
-			line,
-			column,
-		};
-	}
-}
+const FaErrorTrace = require('./fa-error-trace');
 
 /**
  * @constructor
@@ -39,21 +22,18 @@ class FaError extends Error {
 		// }
 		this.name = error.name ? error.name : this.constructor.name;
 		this.message = error.message ? error.message : error;
-		// this.stack = error.stack ? error.stack : (new Error().stack);
-		// this.trace = FaParser.stack(this.stack);
 		if (error.stack) {
 			this.stack = error.stack;
 			this.trace = FaError.stack(this.stack);
 		} else {
 			const stack = FaError.stack(new Error().stack);
-			stack.shift();
-			this.trace = stack;
+			this.trace = stack.slice(1);
 		}
 	}
 
 	/**
 	 * @param {string} data
-	 * @return {FaErrorTrace[]}
+	 * @returns {FaErrorTrace[]}
 	 */
 	static stack(data) {
 		const list = data.split('\n').filter((item) => item);
@@ -80,9 +60,8 @@ class FaError extends Error {
 	}
 
 	/**
-	 *
 	 * @param {number} level
-	 * @return {FaErrorTrace}
+	 * @returns {FaErrorTrace}
 	 */
 	get(level) {
 		return this.trace[level];
@@ -90,7 +69,7 @@ class FaError extends Error {
 
 	/**
 	 * @param {number} level
-	 * @return {FaError}
+	 * @returns {FaError}
 	 */
 	cut(level) {
 		this.trace = [this.trace[level]];
@@ -99,7 +78,7 @@ class FaError extends Error {
 
 	/**
 	 * @param {FaErrorTrace|FaErrorTrace[]} trace
-	 * @return {FaError}
+	 * @returns {FaError}
 	 */
 	set(trace) {
 		this.trace = Array.isArray(trace) ? trace : [trace];
@@ -108,7 +87,7 @@ class FaError extends Error {
 
 	/**
 	 * @param {FaErrorTrace} trace
-	 * @return {FaError}
+	 * @returns {FaError}
 	 */
 	append(trace) {
 		this.trace.push(trace);
@@ -117,7 +96,7 @@ class FaError extends Error {
 
 	/**
 	 * @param {FaErrorTrace} trace
-	 * @return {FaError}
+	 * @returns {FaError}
 	 */
 	prepend(trace) {
 		this.trace.unshift(trace);

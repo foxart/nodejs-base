@@ -16,7 +16,7 @@ console.clear();
 function test() {
 	console.log('');
 	console.log(1, '');
-	console.log(2, {a: ''});
+	console.log(2, { a: '' });
 	console.log(3, err);
 }
 
