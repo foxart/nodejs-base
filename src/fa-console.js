@@ -11,50 +11,35 @@ const FaError = require('./fa-error');
  */
 class FaConsole {
 	/**
-	 * @param {FaBeautifier} beautifier
+	 * @param {FaBeautifier} Beautifier
 	 */
-	constructor(beautifier) {
-		this.beautifier = beautifier;
+	constructor(Beautifier) {
+		this.beautifier = Beautifier;
 		const log = console.log;
 		console.clear = () => {
 			process.stdout.write('\x1Bc');
 		};
 		console.log = (...args) => {
-			const date = DateAndTime.format(new Date(new Date().setUTCHours(new Date().getUTCHours() + 2)), 'H:mm:ss');
 			const trace = new FaError('').get(1);
 			trace.path = trace.path ? trace.path.replace(process.cwd(), '') : trace.path;
 			const data = args.length === 1 ? [args[0]] : args;
 			for (let i = 0; i <= data.length - 1; i++) {
-				log(this.log(date, this.logTrace(trace), this.beautifier.beautify(data[i])));
+				log(this.log(this._date(), this.logTrace(trace), this.beautifier.beautify(data[i])));
 			}
 		};
 		console.message = (...args) => {
-			const date = DateAndTime.format(new Date(new Date().setUTCHours(new Date().getUTCHours() + 2)), 'H:mm:ss');
 			const data = args.length === 1 ? [args[0]] : args;
 			const trace = new FaError('').get(1);
 			trace.path = trace.path ? trace.path.replace(process.cwd(), '') : trace.path;
-			// message = typeof message === 'string' ? message.split('\n') : [message.toString()];
 			log(data);
 			const result = [];
-			const align = this._getAlign(data);
-			result.push(this._messageHeader(align));
+			const align = this._align(data);
+			result.push(this._header(align));
 			for (let i = 0; i < data.length; i++) {
-				// log('align', align, data);
-				// for (let keys = Object.keys(message), i = 0, end = keys.length - 1; i <= end; i++) {
-				result.push(`${this._messageBody(String(data[i]), align)}`);
-				// }
+				result.push(`${this._body(String(data[i]), align)}`);
 			}
-			result.push(`${this._messageFooter(align)}`);
+			result.push(`${this._footer(align)}`);
 			log('\n' + result.join('\n'));
-			// const result = [];
-			// const align = this._getAlign(message);
-			// log('align', align);
-			// result.push(this._messageHeader(align));
-			// for (let keys = Object.keys(message), i = 0, end = keys.length - 1; i <= end; i++) {
-			// 	result.push(`${this._messageBody(message[keys[i]], align)}`);
-			// }
-			// result.push(`${this._messageFooter(align)}`);
-			// log('\n' + result.join('\n'));
 		};
 	}
 
@@ -80,13 +65,12 @@ class FaConsole {
 		].join(' ');
 	}
 
-	/**/
 	/**
 	 * @param {Array} list
 	 * @return {number}
 	 * @private
 	 */
-	_getAlign(list) {
+	_align(list) {
 		let result = 0;
 		for (let keys = Object.keys(list), i = 0, end = keys.length - 1; i <= end; i++) {
 			if (result < String(list[keys[i]]).length) {
@@ -97,11 +81,19 @@ class FaConsole {
 	}
 
 	/**
+	 * @returns {string}
+	 * @private
+	 */
+	_date() {
+		return DateAndTime.format(new Date(new Date().setUTCHours(new Date().getUTCHours() + 2)), 'H:mm:ss');
+	}
+
+	/**
 	 * @param {number} align
 	 * @return {string}
 	 * @private
 	 */
-	_messageHeader(align) {
+	_header(align) {
 		return `${bx.topLeft}${bx.horizontal}${Array(align + 1).join(bx.horizontal)}${bx.horizontal}${bx.topRight}`;
 	}
 
@@ -110,7 +102,7 @@ class FaConsole {
 	 * @return {string}
 	 * @private
 	 */
-	_messageFooter(align) {
+	_footer(align) {
 		return `${bx.bottomLeft}${bx.horizontal}${Array(align + 1).join(bx.horizontal)}${bx.horizontal}${bx.bottomRight}`;
 	}
 
@@ -119,7 +111,7 @@ class FaConsole {
 	 * @return {string}
 	 * @private
 	 */
-	_messageSpacer(align) {
+	_spacer(align) {
 		return `\u251c${bx.horizontal}${Array(align + 1).join(bx.horizontal)}${bx.horizontal}\u2524`;
 	}
 
@@ -129,7 +121,7 @@ class FaConsole {
 	 * @return {string}
 	 * @private
 	 */
-	_messageBody(data, align) {
+	_body(data, align) {
 		const spacer = ' ';
 		const length = align - data.length + 1;
 		if (length < 0) {
