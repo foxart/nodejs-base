@@ -1,9 +1,7 @@
 'use strict';
 const DateAndTime = require('date-and-time');
-const ef = require('fa-beautifier/console-effect');
-const cl = require('fa-beautifier/console-color');
-const bx = require('fa-beautifier/console-box');
-const FaError = require('./fa-error');
+const bx = require('./unicode/Box');
+const FaError = require('./FaError');
 
 /**
  * @constructor
@@ -23,45 +21,23 @@ class FaConsole {
 			trace.path = trace.path ? trace.path.replace(process.cwd(), '') : trace.path;
 			const data = args.length === 1 ? [args[0]] : args;
 			for (let i = 0; i <= data.length - 1; i++) {
-				log(this.log(this._date(), this.logTrace(trace), this.beautifier.beautify(data[i])));
+				log(this.beautifier.wrapper.log(this._date(), this.beautifier.wrapper.logTrace(trace), this.beautifier.beautify(data[i])));
 			}
 		};
 		console.message = (...args) => {
 			const data = args.length === 1 ? [args[0]] : args;
 			const trace = new FaError('').get(1);
 			trace.path = trace.path ? trace.path.replace(process.cwd(), '') : trace.path;
-			log(data);
 			const result = [];
 			const align = this._align(data);
 			result.push(this._header(align));
+			// result.push(this._spacer(align));
 			for (let i = 0; i < data.length; i++) {
 				result.push(`${this._body(String(data[i]), align)}`);
 			}
 			result.push(`${this._footer(align)}`);
-			log('\n' + result.join('\n'));
+			log(this.beautifier.wrapper.log(this._date(), this.beautifier.wrapper.logTrace(trace), `\n${result.join('\n')}`));
 		};
-	}
-
-	/**
-	 * @param {string} date
-	 * @param {string} trace
-	 * @param {string} data
-	 * @returns {string}
-	 */
-	log(date, trace, data) {
-		return `${ef.reset}${cl.white}[${cl.yellow}${date}${cl.white}] ${trace} ${ef.bold}${cl.black}| ${data}`;
-	}
-
-	/**
-	 * @param {FaErrorTrace} data
-	 * @returns {string}
-	 */
-	logTrace(data) {
-		return [
-			`${ef.reset}${ef.bold}${data.method}`,
-			`${ef.reset}${ef.bold}${cl.black}${data.path}`,
-			`${ef.reset}${cl.yellow}${data.line}${ef.bold}${cl.black}:${ef.reset}${data.column}`
-		].join(' ');
 	}
 
 	/**
@@ -111,7 +87,7 @@ class FaConsole {
 	 * @private
 	 */
 	_spacer(align) {
-		return `\u251c${bx.horizontal}${Array(align + 1).join(bx.horizontal)}${bx.horizontal}\u2524`;
+		return `${bx.verticalLeft}${bx.horizontal}${Array(align + 1).join(bx.horizontal)}${bx.horizontal}${bx.verticalRight}`;
 	}
 
 	/**

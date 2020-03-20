@@ -1,2 +1,2 @@
 'use strict';
-module.exports = require('./src/fa-error');
+module.exports = require('./src/FaError');

@@ -1,0 +1,147 @@
+.fa-beautifier {
+	display: block;
+	font-family: monospace;
+	font-size: 14px;
+	white-space: pre;
+}
+
+.fa-beautifier .fa-tab {
+	border-left: solid 1px gray;
+	border-collapse: collapse;
+	opacity: 0.5;
+}
+
+.fa-beautifier .fa-bright {
+	font-weight: bold;
+	color: black;
+}
+
+.fa-beautifier .fa-normal {
+	font-weight: normal;
+	color: black;
+}
+
+.fa-beautifier .fa-dim {
+	font-weight: normal;
+	color: black;
+	opacity: 0.5;
+}
+
+.fa-beautifier .fa-array {
+	font-weight: bold;
+}
+
+.fa-beautifier .fa-array-key {
+	font-weight: bold;
+}
+
+.fa-beautifier .fa-bool-true {
+	font-weight: bold;
+	color: green;
+}
+
+.fa-beautifier .fa-bool-false {
+	font-weight: bold;
+	color: red;
+}
+
+.fa-beautifier .fa-buffer .fa-bright {
+	color: black;
+	background-color: yellow;
+}
+
+.fa-beautifier .fa-circular .fa-bright {
+	color: white;
+	background-color: black;
+}
+
+.fa-beautifier .fa-date .fa-bright {
+	color: white;
+	background-color: blue;
+}
+
+.fa-beautifier .fa-error-message {
+	font-weight: bold;
+}
+
+.fa-beautifier .fa-error .fa-bright {
+	color: white;
+	background-color: red;
+}
+
+.fa-beautifier .fa-error-path {
+	color: gray;
+}
+
+.fa-beautifier .fa-error-line {
+	font-weight: bold;
+	color: red;
+}
+
+.fa-beautifier .fa-error-column {
+}
+
+.fa-beautifier .fa-error-key {
+	font-weight: bold;
+}
+
+.fa-beautifier .fa-float {
+	font-weight: bold;
+	color: brown;
+}
+
+.fa-beautifier .fa-function-line {
+	color: blue;
+}
+
+.fa-beautifier .fa-json .fa-bright {
+	color: black;
+	background-color: yellow;
+}
+
+.fa-beautifier .fa-int {
+	color: brown;
+}
+
+.fa-beautifier .fa-mongo-id .fa-bright {
+	color: white;
+	background-color: blue;
+}
+
+.fa-beautifier .fa-null {
+	font-weight: bold;
+	color: purple;
+}
+
+.fa-beautifier .fa-object {
+	font-weight: bold;
+}
+
+.fa-beautifier .fa-object-key {
+	font-weight: bold;
+}
+
+.fa-beautifier .fa-reg-exp .fa-bright {
+	color: white;
+	background-color: blue;
+}
+
+.fa-beautifier .fa-string-line {
+	color: darkcyan;
+}
+
+.fa-beautifier .fa-undefined {
+	font-weight: bold;
+	color: white;
+	background-color: purple;
+}
+
+.fa-beautifier .fa-unknown .fa-bright{
+	color: white;
+	background-color: black;
+}
+
+.fa-beautifier .fa-xml .fa-bright {
+	color: black;
+	background-color: yellow;
+}

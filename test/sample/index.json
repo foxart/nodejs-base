@@ -1,0 +1,112 @@
+{
+	"myArr": [
+		1,
+		[
+			21,
+			[
+				2.21,
+				[
+					2.221
+				],
+				2.23
+			],
+			[],
+			24
+		],
+		3
+	],
+	"myObj": {
+		"a1": 1,
+		"a2": {
+			"b21": 21,
+			"b22": {
+				"c221": 2.21,
+				"c222": "<circular(myObj)>",
+				"c223": 2.23
+			},
+			"b23": 23
+		},
+		"a3": 3
+	},
+	"myUnd": "undefined",
+	"null": null,
+	"bool1": true,
+	"bool2": false,
+	"myReg": "/(?:\\d{3}|\\(\\d{3}\\))([-\\/.])\\d{3}\\1\\d{4}/",
+	"myDate": "2020-02-24T12:11:09.457Z",
+	"myStr": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.\nLorem Ipsum has been the industry's standard dummy text ever since the 1500s,\n<html lang=\"ru\"><head><title>TEST<\/title><\/head><\/html>\nwhen an unknown printer took a galley of type and scrambled it to make a type specimen book.\nIt has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
+	"myMap": "[object Map]",
+	"myWeakMap": "[object WeakMap]",
+	"myPromise": "[object Promise]",
+	"myArrayBuffer": "[object ArrayBuffer]",
+	"myBuffer": {"type":"Buffer","data":[1,0,3,4,5]},
+	"myFunc": "function map(f, a) {\n\tconst result = []; \/\/ Create a new Array\n\tlet i;\n\t\/*some comment*\/\n\tfor (i = 0; i !== a.length; i++) {\n\t\tresult[i] = f(a[i]);\n\t}\n\tconsole.log('<html lang=\"ru\"><head><title>TEST<\/title><\/head><\/html>');\n\treturn result;\n}",
+	"myException": {
+		"name": "Error",
+		"message": "ReferenceError: a is not defined",
+		"trace": [
+			{
+				"method": "null",
+				"path": "\/test\/data\/exception.js",
+				"line": 6,
+				"column": 10
+			},
+			{
+				"method": "Object.<anonymous>",
+				"path": "\/test\/data\/exception.js",
+				"line": 8,
+				"column": 3
+			},
+			{
+				"method": "Module._compile",
+				"path": "internal\/modules\/cjs\/loader.js",
+				"line": 956,
+				"column": 30
+			},
+			{
+				"method": "Object.Module._extensions..js",
+				"path": "internal\/modules\/cjs\/loader.js",
+				"line": 973,
+				"column": 10
+			},
+			{
+				"method": "Module.load",
+				"path": "internal\/modules\/cjs\/loader.js",
+				"line": 812,
+				"column": 32
+			},
+			{
+				"method": "Function.Module._load",
+				"path": "internal\/modules\/cjs\/loader.js",
+				"line": 724,
+				"column": 14
+			},
+			{
+				"method": "Module.require",
+				"path": "internal\/modules\/cjs\/loader.js",
+				"line": 849,
+				"column": 19
+			},
+			{
+				"method": "require",
+				"path": "internal\/modules\/cjs\/helpers.js",
+				"line": 74,
+				"column": 18
+			},
+			{
+				"method": "Object.<anonymous>",
+				"path": "\/test\/index.js",
+				"line": 26,
+				"column": 21
+			},
+			{
+				"method": "Module._compile",
+				"path": "internal\/modules\/cjs\/loader.js",
+				"line": 956,
+				"column": 30
+			}
+		]
+	},
+	"jsonObj": "{\"a1\":1,\"a2\":{\"b21\":21,\"b22\":{\"c221\":2.21,\"c222\":{},\"c223\":2.23},\"b23\":23},\"a3\":3}",
+	"mongoId": "5e53bd5d4e095478fea06fef"
+}

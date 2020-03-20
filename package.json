@@ -6,6 +6,7 @@
   "scripts": {
     "start": "echo \"Error: no start specified\" && exit 1",
     "lint": "eslint -c .eslintrc.json.google ./src",
+    "test:beautifier": "nodemon ./test/beautifier.js",
     "test:console": "nodemon ./test/console.js",
     "test:error": "nodemon ./test/error.js"
   },
@@ -21,12 +22,13 @@
   "homepage": "https://github.com/foxart/nodejs-base#readme",
   "dependencies": {
     "date-and-time": "^0.12.0",
-    "fa-beautifier": "^1.0.14"
+    "fast-xml-parser": "^3.16.0"
   },
   "devDependencies": {
     "@types/node": "^13.9.2",
     "eslint": "^6.7.2",
     "eslint-config-google": "^0.14.0",
+    "mongodb": "^3.5.5",
     "nodemon": "^2.0.2"
   }
 }

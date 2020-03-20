@@ -2,7 +2,7 @@
 /**
  * @class {FaErrorTrace}
  */
-const FaErrorTrace = require('./fa-error-trace');
+const FaErrorTrace = require('./FaErrorTrace');
 
 /**
  * @constructor
@@ -60,11 +60,15 @@ class FaError extends Error {
 	}
 
 	/**
-	 * @param {number} level
-	 * @returns {FaErrorTrace}
+	 * @param {number | undefined} level
+	 * @returns {FaErrorTrace | FaErrorTrace[]}
 	 */
-	get(level) {
-		return this.trace[level];
+	get(level = undefined) {
+		if (level !== undefined) {
+			return this.trace[level];
+		} else {
+			return this.trace;
+		}
 	}
 
 	/**
@@ -77,7 +81,7 @@ class FaError extends Error {
 	}
 
 	/**
-	 * @param {FaErrorTrace|FaErrorTrace[]} trace
+	 * @param {FaErrorTrace | FaErrorTrace[]} trace
 	 * @returns {FaError}
 	 */
 	set(trace) {

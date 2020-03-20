@@ -5,10 +5,10 @@
  */
 class FaErrorTrace {
 	/**
-	 * @param {string | null} method
-	 * @param {string | null} path
-	 * @param {string | null} line
-	 * @param {string | null} column
+	 * @param {*} method
+	 * @param {*} path
+	 * @param {*} line
+	 * @param {*} column
 	 * @returns {{path: *, method: *, line: *, column: *}}
 	 */
 	constructor(method, path, line, column) {
