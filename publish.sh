@@ -35,7 +35,6 @@ echo "---"
 echo "${CURRENT} - ${PUBLISHED} - ${BRANCH}"
 echo "---"
 
-
 if [[ "${BRANCH}" != "master" ]]; then
   echo "<<< $BRANCH >>> cannot be published"
 elif [[ "${CURRENT}" == "${PUBLISHED}" ]]; then
