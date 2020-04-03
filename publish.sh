@@ -24,7 +24,6 @@
 #else
 #  echo "already have tag <$PREV> on commit $COMMIT: $MESSAGE"
 #fi
-
 ## PUBLISH TO NPM
 BRANCH=$(git branch | grep "\*" | cut -d " " -f2)
 MESSAGE=$(git log -1 --oneline)
