@@ -27,7 +27,7 @@
 
 ## PUBLISH TO NPM
 BRANCH=$(git branch | grep "\*" | cut -d " " -f2)
-#COMMIT=$(git rev-parse HEAD)
+COMMIT=$(git rev-parse HEAD)
 MESSAGE=$(git log -1 --oneline)
 CURRENT=$(node -p "require('./package.json').version")
 #CURRENT='xxx'
