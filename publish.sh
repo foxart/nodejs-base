@@ -39,7 +39,6 @@ echo "---"
 if [[ "${BRANCH}" != "master" ]]; then
   echo "<<< $BRANCH >>> cannot be published"
 elif [[ "${CURRENT}" == "${PUBLISHED}" ]]; then
-  echo "XXXXXXXXXXXXXXX"
   #  ~/disconnect_cisco.sh
   #  npm version ${NEXT}
 #    npm version patch
