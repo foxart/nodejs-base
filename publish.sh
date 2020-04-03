@@ -48,5 +48,5 @@ elif [[ "${CURRENT}" == "${PUBLISHED}" ]]; then
   #  ~/connect_cisco.sh
   echo "<<< $PUBLISHED >>> have commit [$MESSAGE]"
 else
-  echo "<<< $NEXT >>> published [$MESSAGE]"
+  echo "<<< publis [$MESSAGE]"
 fi
