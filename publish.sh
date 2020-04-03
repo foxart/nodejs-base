@@ -29,7 +29,7 @@
 BRANCH=$(git branch | grep "\*" | cut -d " " -f2)
 MESSAGE=$(git log -1 --oneline)
 CURRENT=$(node -p "require('./package.json').version")
-PUBLISHED=$(git describe | grep -o "${MESSAGE}")
+PUBLISHED=$(git describe | grep -o "${CURRENT}")
 
 echo "---"
 echo "${CURRENT} - ${PUBLISHED} - ${BRANCH}"
