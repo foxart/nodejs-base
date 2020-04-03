@@ -27,22 +27,18 @@
 
 ## PUBLISH TO NPM
 BRANCH=$(git branch | grep "\*" | cut -d " " -f2)
-COMMIT=$(git rev-parse HEAD)
 MESSAGE=$(git log -1 --oneline)
 CURRENT=$(node -p "require('./package.json').version")
-#CURRENT='xxx'
-PUBLISHED=$(git describe --contains git rev-parse HEAD)
+PUBLISHED=$(git describe | grep -o "${CURRENT}")
 
-echo "COMMIT"
-echo "${COMMIT}"
 echo "---"
 echo "${CURRENT} - ${PUBLISHED} - ${BRANCH}"
 echo "---"
 
 
 if [[ "${BRANCH}" != "master" ]]; then
-  echo "branch <$BRANCH> cannot be published"tslint.json
-elif [[ -z ${PUBLISHED} ]]; then
+  echo "<<< $BRANCH >>> cannot be published"
+elif [[ "${CURRENT}" == "${PUBLISHED}" ]]; then
   echo "XXXXXXXXXXXXXXX"
   #  ~/disconnect_cisco.sh
   #  npm version ${NEXT}
@@ -51,7 +47,7 @@ elif [[ -z ${PUBLISHED} ]]; then
 #    git push
   #  git push --tags
   #  ~/connect_cisco.sh
-  echo "<<< $NEXT >>> published [$MESSAGE]"
-else
   echo "<<< $PUBLISHED >>> have commit [$MESSAGE]"
+else
+  echo "<<< $NEXT >>> published [$MESSAGE]"
 fi
