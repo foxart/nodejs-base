@@ -33,8 +33,8 @@ CURRENT=$(node -p "require('./package.json').version")
 #CURRENT='xxx'
 PUBLISHED=$(git describe --contains git rev-parse HEAD)
 
-#echo "COMMIT"
-#echo "${COMMIT}"
+echo "COMMIT"
+echo "${COMMIT}"
 echo "---"
 echo "${CURRENT} - ${PUBLISHED} - ${BRANCH}"
 echo "---"
@@ -46,9 +46,9 @@ elif [[ -z ${PUBLISHED} ]]; then
   echo "XXXXXXXXXXXXXXX"
   #  ~/disconnect_cisco.sh
   #  npm version ${NEXT}
-  #  npm version patch
+#    npm version patch
   #  git commit -a -m "update to tag <$NEXT> [$MESSAGE]"
-  #  git push
+#    git push
   #  git push --tags
   #  ~/connect_cisco.sh
   echo "<<< $NEXT >>> published [$MESSAGE]"
