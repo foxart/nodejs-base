@@ -26,7 +26,7 @@ const err = new FaError('my custom error');
 //
 console.log('user', [2, 3]);
 console.log([1, 2, 3], undefined);
-// const data = { a: 1, b: 3.14, str: 'string' };
-// console.log(data);
+const data = { a: 1, b: 3.14, str: 'string' };
+console.log(JSON.stringify(data));
 
 

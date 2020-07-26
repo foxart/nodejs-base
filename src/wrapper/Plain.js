@@ -161,6 +161,29 @@ class Plain extends Wrapper {
 	}
 
 	/**
+	 * @param {string} date
+	 * @param {string} trace
+	 * @param {string} data
+	 * @returns {string}
+	 */
+	log(date, trace, data) {
+		return `[${date}] ${trace} ${data}`;
+	}
+
+	/**
+	 * @param {FaErrorTrace} data
+	 * @returns {string}
+	 */
+	logTrace(data) {
+		return [
+			`${data.method} `,
+			`${data.path}:`,
+			`${data.line}:`,
+			`${data.column}`
+		].join('');
+	}
+
+	/**
 	 * @param {object} data
 	 * @returns {string}
 	 */
