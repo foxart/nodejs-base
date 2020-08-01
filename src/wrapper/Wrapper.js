@@ -78,7 +78,12 @@ class Wrapper extends WrapperInterface {
 		const lines = data.split(this.nl);
 		const result = lines.map((item) => {
 			const match = regExp.exec(item);
-			return `${match[1].replace(/\t/g, this.getTab(1))}${callback.call(this, match[2])}`;
+			if (match) {
+				/*error here refactor*/
+				return `${match[1].replace(/\t/g, this.getTab(1))}${callback.call(this, match[2])}`;
+			} else {
+				return callback.call(item);
+			}
 		});
 		if (level) {
 			return result.join(`${this.nl}${this.getTab(level + 1)}`);
