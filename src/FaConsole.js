@@ -45,20 +45,19 @@ class FaConsole {
 			log(this.wrapper.log(this._date(), this.wrapper.logTrace(trace), `\n${result.join('\n')}`));
 		};
 		console.error = (error) => {
-			// log(error);
-			// log(new FaError(error).get(1));
-			const exception = 'exception';
-			const type = 'type';
-			const trace = new FaError(error).get(1);
-			trace.path = trace.path ? trace.path.replace(process.cwd(), '') : trace.path;
-			const result = [];
-			const align = this._align([exception, type]);
-			result.push(this._header(align));
-			result.push(`${this._body(String(type), align)}`);
-			result.push(this._spacer(align));
-			result.push(`${this._body(String(exception), align)}`);
-			result.push(`${this._footer(align)}`);
-			log(this.wrapper.log(this._date(), this.wrapper.logTrace(trace), `\n${result.join('\n')}`));
+			log(error);
+			// const exception = 'exception';
+			// const type = 'type';
+			// const trace = new FaError('').get(1);
+			// trace.path = trace.path ? trace.path.replace(process.cwd(), '') : trace.path;
+			// const result = [];
+			// const align = this._align([exception, type]);
+			// result.push(this._header(align));
+			// result.push(`${this._body(String(type), align)}`);
+			// result.push(this._spacer(align));
+			// result.push(`${this._body(String(exception), align)}`);
+			// result.push(`${this._footer(align)}`);
+			// log(this.wrapper.log(this._date(), this.wrapper.logTrace(trace), `\n${result.join('\n')}`));
 		};
 		// process.on('unhandledRejection', (rejection) => {
 		// 	console.error(rejection);
