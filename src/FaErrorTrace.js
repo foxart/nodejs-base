@@ -1,8 +1,5 @@
 'use strict';
 
-/**
- * @constructor
- */
 class FaErrorTrace {
 	/**
 	 * @param {*} method

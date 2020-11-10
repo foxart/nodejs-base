@@ -1,15 +1,22 @@
 'use strict';
 const Wrapper = require('./Wrapper');
 
-/**
- * @constructor
- */
-class Json extends Wrapper {
+class WrapperPlain extends Wrapper {
 	/**
-	 * @param {Wrapper} Wrapper
+	 * @constructor
 	 */
-	constructor(Wrapper) {
+	constructor() {
 		super();
+		super.tab = `    `;
+	}
+
+	/**
+	 * @param {string} key
+	 * @param {number|string} value
+	 * @returns {string}
+	 */
+	_type(key, value) {
+		return `<${key}(${value})>`;
 	}
 
 	/**
@@ -28,22 +35,22 @@ class Json extends Wrapper {
 	 */
 	array(data, length, level) {
 		const result = length ? `${data}${this.nl}${this.getTab(level - 1)}` : '';
-		return `[${result}]`;
+		return `${this._type('array', length)} [${result}]`;
 	}
 
 	/**
 	 * @param {string} data
-	 * @param {number} key
+	 * @param {number} index
 	 * @param {number} length
 	 * @param {number} level
 	 * @returns {string}
 	 */
-	arrayItem(data, key, length, level) {
+	arrayItem(data, index, length, level) {
 		let result;
-		if (key === length - 1) {
-			result = `${data}`;
+		if (index === length - 1) {
+			result = `${index}: ${data}`;
 		} else {
-			result = `${data},`;
+			result = `${index}: ${data},`;
 		}
 		return `${this.nl}${this.getTab(level)}${result}`;
 	}
@@ -62,7 +69,7 @@ class Json extends Wrapper {
 	 * @returns {string}
 	 */
 	buffer(data, length) {
-		return `${JSON.stringify(data)}`;
+		return this._type('buffer', length);
 	}
 
 	/**
@@ -71,7 +78,7 @@ class Json extends Wrapper {
 	 * @returns {string}
 	 */
 	circular(data, key) {
-		return `"<circular(${key})>"`;
+		return this._type('circular', key);
 	}
 
 	/**
@@ -79,7 +86,7 @@ class Json extends Wrapper {
 	 * @returns {string}
 	 */
 	date(data) {
-		return `"${data.toJSON()}"`;
+		return this._type('date', data.toString());
 	}
 
 	/**
@@ -90,12 +97,7 @@ class Json extends Wrapper {
 	 * @returns {string}
 	 */
 	error(data, trace, length, level) {
-		const result = [
-			`${this.nl}${this.getTab(level)}"name": "${this.escapeText(data.name)}"`,
-			`${this.nl}${this.getTab(level)}"message": "${this.escapeText(data.message)}"`,
-			`${this.nl}${this.getTab(level)}"trace": [${trace}${this.nl}${this.getTab(level)}]`
-		].join(`,`);
-		return `{${result}${this.nl}${this.getTab(level - 1)}}`;
+		return `${this._type(data.name, data.message)} [${trace}${this.nl}${this.getTab(level - 1)}]`;
 	}
 
 	/**
@@ -107,16 +109,15 @@ class Json extends Wrapper {
 	 */
 	errorTrace(data, index, length, level) {
 		const trace = [
-			`${this.nl}${this.getTab(level + 2)}"method": "${this.escapeText(data.method)}"`,
-			`${this.nl}${this.getTab(level + 2)}"path": "${this.escapeText(data.path)}"`,
-			`${this.nl}${this.getTab(level + 2)}"line": ${data['line']}`,
-			`${this.nl}${this.getTab(level + 2)}"column": ${data['column']}`
-		].join(`,`);
+			`${data.path}`,
+			`${data.method}`,
+			`${data.line}:${data.column}`
+		].join(' ');
 		let result;
 		if (index === length - 1) {
-			result = `${this.getTab(level - 1)}{${trace}${this.nl}${this.getTab(level + 1)}}`;
+			result = `${index}: ${trace}`;
 		} else {
-			result = `${this.getTab(level - 1)}{${trace}${this.nl}${this.getTab(level + 1)}},`;
+			result = `${index}: ${trace},`;
 		}
 		return `${this.nl}${this.getTab(level)}${result}`;
 	}
@@ -126,7 +127,7 @@ class Json extends Wrapper {
 	 * @returns {string}
 	 */
 	float(data) {
-		return `${data}`;
+		return `<float> ${data}`;
 	}
 
 	/**
@@ -135,7 +136,8 @@ class Json extends Wrapper {
 	 * @returns {string}
 	 */
 	function(data, level) {
-		return `"${this.escapeText(data)}"`;
+		const callback = (item) => item;
+		return `${this.indentText(data, level, callback)}`;
 	}
 
 	/**
@@ -144,7 +146,7 @@ class Json extends Wrapper {
 	 * @returns {string}
 	 */
 	json(data, length) {
-		return `"${this.escapeText(data)}"`;
+		return `${this._type('json', length)} ${data}`;
 	}
 
 	/**
@@ -152,7 +154,7 @@ class Json extends Wrapper {
 	 * @returns {string}
 	 */
 	int(data) {
-		return `${data}`;
+		return `<int> ${data}`;
 	}
 
 	/**
@@ -160,7 +162,7 @@ class Json extends Wrapper {
 	 * @returns {string}
 	 */
 	mongoId(data) {
-		return `"${data.toString()}"`;
+		return this._type('mongoId', data.toString());
 	}
 
 	/**
@@ -179,7 +181,7 @@ class Json extends Wrapper {
 	 */
 	object(data, length, level) {
 		const result = length ? `${data}${this.nl}${this.getTab(level - 1)}` : '';
-		return `{${result}}`;
+		return `${this._type('object', length)} {${result}}`;
 	}
 
 	/**
@@ -193,9 +195,9 @@ class Json extends Wrapper {
 	objectItem(data, key, index, length, level) {
 		let result;
 		if (index === length - 1) {
-			result = `"${key}": ${data}`;
+			result = `${key}: ${data}`;
 		} else {
-			result = `"${key}": ${data},`;
+			result = `${key}: ${data},`;
 		}
 		return `${this.nl}${this.getTab(level)}${result}`;
 	}
@@ -205,7 +207,7 @@ class Json extends Wrapper {
 	 * @returns {string}
 	 */
 	regExp(data) {
-		return `"${data.toString().replace(/\\/g, '\\\\')}"`;
+		return this._type('regExp', data.toString());
 	}
 
 	/**
@@ -215,7 +217,8 @@ class Json extends Wrapper {
 	 * @returns {string}
 	 */
 	string(data, length, level) {
-		return `"${this.escapeText(data)}"`;
+		const callback = (item) => item;
+		return `${this._type('string', length)} ${this.indentText(data, level, callback)}`;
 	}
 
 	/**
@@ -223,16 +226,16 @@ class Json extends Wrapper {
 	 * @returns {string}
 	 */
 	undefined(data) {
-		return `"${data}"`;
+		return `${data}`;
 	}
 
 	/**
 	 * @param {string} data
-	 * @param {number} level
+	 * @param {number} length
 	 * @returns {string}
 	 */
-	xml(data, level) {
-		return `"${this.escapeText(data)}"`;
+	xml(data, length) {
+		return `${this._type('xml', length)} ${data}`;
 	}
 
 	/**
@@ -240,11 +243,11 @@ class Json extends Wrapper {
 	 * @returns {string}
 	 */
 	unknown(data) {
-		return `"${data}"`;
+		return this._type('unknown', data);
 	}
 }
 
 /**
- * @class {Json}
+ * @class {WrapperPlain}
  */
-module.exports = Json;
+module.exports = WrapperPlain;

@@ -5,10 +5,7 @@ const cl = require('../unicode/Color');
 const ef = require('../unicode/Effect');
 const Wrapper = require('./Wrapper');
 
-/**
- * Color
- */
-class Color extends Wrapper {
+class WrapperColor extends Wrapper {
 	/**
 	 * @constructor
 	 */
@@ -335,6 +332,6 @@ class Color extends Wrapper {
 }
 
 /**
- * @class {Color}
+ * @class {WrapperColor}
  */
-module.exports = Color;
+module.exports = WrapperColor;

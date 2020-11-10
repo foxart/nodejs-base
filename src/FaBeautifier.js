@@ -2,14 +2,12 @@
 'use strict';
 const FastXmlParser = require('fast-xml-parser');
 const FaError = require('./FaError');
-const FaBeautifierWrapperJson = require('./wrapper/Json');
+const FaBeautifierWrapperJson = require('./wrapper/WrapperJson');
 
-/**
- * @constructor
- */
 class FaBeautifier {
 	/**
-	 * @param {WrapperInterface} Wrapper
+	 * @param {*} Wrapper
+	 * @property {Wrapper} wrapper
 	 */
 	constructor(Wrapper) {
 		this.wrapper = new Wrapper();

@@ -1,34 +1,34 @@
 {
-  "name": "fa-base",
-  "version": "1.0.12",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "echo \"Error: no start specified\" && exit 1",
-    "lint": "eslint -c .eslintrc.json.google ./src",
-    "test:beautifier": "nodemon ./test/beautifier.js",
-    "test:console": "nodemon ./test/console.js",
-    "test:error": "nodemon ./test/error.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/foxart/nodejs-base.git"
-  },
-  "author": "Ivan Kosenko",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/foxart/nodejs-base/issues"
-  },
-  "homepage": "https://github.com/foxart/nodejs-base#readme",
-  "dependencies": {
-    "date-and-time": "^0.12.0",
-    "fast-xml-parser": "^3.16.0"
-  },
-  "devDependencies": {
-    "@types/node": "^13.9.2",
-    "eslint": "^6.7.2",
-    "eslint-config-google": "^0.14.0",
-    "mongodb": "^3.5.5",
-    "nodemon": "^2.0.2"
-  }
+	"name": "fa-base",
+	"version": "1.0.11",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"start": "echo \"Error: no start specified\" && exit 1",
+		"lint": "eslint -c .eslintrc.json ./src",
+		"test:beautifier": "nodemon ./test/beautifier.js",
+		"test:console": "nodemon ./test/console.js",
+		"test:error": "nodemon ./test/error.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/foxart/nodejs-base.git"
+	},
+	"dependencies": {
+		"date-and-time": "^0.12.0",
+		"fast-xml-parser": "^3.17.3"
+	},
+	"devDependencies": {
+		"@types/node": "^13.13.10",
+		"eslint": "^6.7.2",
+		"eslint-config-google": "^0.14.0",
+		"mongodb": "^3.5.8",
+		"nodemon": "^2.0.4"
+	},
+	"author": "Ivan Kosenko",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/foxart/nodejs-base/issues"
+	},
+	"homepage": "https://github.com/foxart/nodejs-base#readme"
 }

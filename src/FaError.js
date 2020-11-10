@@ -4,9 +4,6 @@
  */
 const FaErrorTrace = require('./FaErrorTrace');
 
-/**
- * @constructor
- */
 class FaError extends Error {
 	/**
 	 * @param {*} error
@@ -20,9 +17,9 @@ class FaError extends Error {
 		// } else {
 		// 	this.stack = (new Error(error)).stack;
 		// }
-		this.name = error.name ? error.name : this.constructor.name;
-		this.message = error.message ? error.message : error;
-		if (error.stack) {
+		this.name = error && error.name ? error.name : this.constructor.name;
+		this.message = error && error.message ? error.message : error;
+		if (error && error.stack) {
 			this.stack = error.stack;
 			this.trace = FaError.stack(this.stack);
 		} else {

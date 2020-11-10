@@ -1,12 +1,6 @@
 'use strict';
 require('../console-color');
 const FaError = require('../error');
-// const FaBeautifier = require('../beautifier-console');
-// const FaBeautifier = require('../beautifier-json');
-// const FaBeautifier = require('../beautifier-plain');
-// const FaBeautifier = require('../beautifier-html');
-
-// new FaConsole(FaBeautifier);
 console.clear();
 
 function test() {
@@ -28,4 +22,4 @@ console.log([1, 2, 3], undefined);
 // const data = { a: 1, b: 3.14, str: 'string' };
 // console.log(data);
 
-
+console.error(123);

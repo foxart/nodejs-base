@@ -1,14 +1,11 @@
 'use strict';
 const Wrapper = require('./Wrapper');
 
-/**
- * @constructor
- */
-class Html extends Wrapper {
+class WrapperHtml extends Wrapper {
 	/**
-	 * @param {Wrapper} Wrapper
+	 * @constructor
 	 */
-	constructor(Wrapper) {
+	constructor() {
 		super();
 		super.tab = `<span class="fa-tab">&nbsp;&nbsp;&nbsp;&nbsp;</span>`;
 	}
@@ -310,6 +307,6 @@ class Html extends Wrapper {
 }
 
 /**
- * @class {Html}
+ * @class {WrapperHtml}
  */
-module.exports = Html;
+module.exports = WrapperHtml;

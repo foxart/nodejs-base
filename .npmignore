@@ -1,7 +1,7 @@
-.idea
-node_modules
-.gitignore
-.npmignore
-package.json
-package-lock.json
-*.sh
+/.idea
+/node_modules
+/.gitignore
+/.npmignore
+/package.json
+/package-lock.json
+/*.sh
