@@ -1,4 +1,6 @@
 'use strict';
-const BeautifierColor = require('./beautifier-color');
 const FaConsole = require('./src/FaConsole');
-module.exports = new FaConsole(BeautifierColor);
+const FaBeautifier = require('./src/FaBeautifier');
+const FaWrapper = require('./src/wrapper/WrapperColor');
+const Beautifier = new FaBeautifier(FaWrapper);
+module.exports = new FaConsole(Beautifier);

@@ -49,7 +49,7 @@ class FaConsole {
 			// log(new FaError(error).get(1));
 			const exception = 'exception';
 			const type = 'type';
-			const trace = new FaError('').get(1);
+			const trace = new FaError(error).get(1);
 			trace.path = trace.path ? trace.path.replace(process.cwd(), '') : trace.path;
 			const result = [];
 			const align = this._align([exception, type]);

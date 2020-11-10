@@ -116,7 +116,7 @@ class WrapperColor extends Wrapper {
 	 */
 	array(data, length, level) {
 		const result = length ? `${data}${this.nl}${this.getTab(level - 1)}` : '';
-		return `${ef.reset}${this._type('array', length)} ${this._normal('[')}${result}${this._normal(']')}`;
+		return `${ef.reset}${this._normal('[')}${result}${this._normal(']')}`;
 	}
 
 	/**
@@ -269,7 +269,7 @@ class WrapperColor extends Wrapper {
 	 */
 	object(data, length, level) {
 		const result = length ? `${data}${this.nl}${this.getTab(level - 1)}` : '';
-		return `${ef.reset}${this._type('object', length)} ${this._normal('{')}${result}${this._normal('}')}`;
+		return `${ef.reset}${this._normal('{')}${result}${this._normal('}')}`;
 	}
 
 	/**
@@ -302,7 +302,7 @@ class WrapperColor extends Wrapper {
 		const callback = (item) => {
 			return `${this._dim(item)}`;
 		};
-		return `${ef.reset}${this._type('string', length)} ${this.indentText(data, level, callback)}`;
+		return `${ef.reset}${this.indentText(data, level, callback)}`;
 	}
 
 	/**

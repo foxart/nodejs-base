@@ -1,4 +1,4 @@
 'use strict';
+const FaWrapper = require('./src/wrapper/WrapperJson');
 const FaBeautifier = require('./src/FaBeautifier');
-const WrapperJson = require('./src/wrapper/WrapperJson');
-module.exports = new FaBeautifier(WrapperJson);
+module.exports = new FaBeautifier(FaWrapper);
