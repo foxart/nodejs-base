@@ -53,9 +53,9 @@ class WrapperColor extends Wrapper {
 	_item(data, key, index, length, level) {
 		let result;
 		if (index === length - 1) {
-			result = `${ef.reset}${this._bright(key)}${this._dim(':')} ${data}`;
+			result = `${ef.reset}${this._bright(key)}${this._dim(':')} ${data}${ef.reset}`;
 		} else {
-			result = `${ef.reset}${this._bright(key)}${this._dim(':')} ${data}${this._dim(',')}`;
+			result = `${ef.reset}${this._bright(key)}${this._dim(':')} ${data}${this._dim(',')}${ef.reset}`;
 		}
 		return `${this.nl}${this.getTab(level)}${result}`;
 	}
